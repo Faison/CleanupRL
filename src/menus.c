@@ -65,7 +65,9 @@ void show_menu_options( char *title, char *options[], int num_options )
 	int i, xpos = 0;
 
 	xpos = (COLS - strlen(title)) / 2;
+	attron(A_BOLD);
 	mvprintw(2, xpos, "%s", title);
+	attroff(A_BOLD);
 
 	for (i = 0; i < num_options; i++) {
 		xpos = (COLS - strlen(options[i])) / 2;

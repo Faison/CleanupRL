@@ -39,7 +39,9 @@ void show_dialog_text( char *title, char *lines[], int num_lines ) {
 
 	clear();
 	xpos = (COLS - strlen(title)) / 2;
+	attron(A_BOLD);
 	mvprintw(2, xpos, "%s", title);
+	attroff(A_BOLD);
 
 	for (i = 0; i < num_lines; i++) {
 		len = strlen(lines[i]);
