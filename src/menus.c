@@ -47,7 +47,7 @@ char *show_menu( char *title, char *options[], int num_options )
 
 		mvprintw(cursor_position + 5, xlef, ">");
 		mvprintw(cursor_position + 5, xri, "<");
-	} while ( (c = getch()) != '\n' );
+	} while ( (c = getch()) != '\n' && c != ' ' );
 
 	return options[cursor_position];
 }
