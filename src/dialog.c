@@ -20,7 +20,6 @@ void show_dialog( char *title, char *lines[], int num_lines )
 
 	while ( (c = getch()) != ' ' ) {
 		if (c == KEY_RESIZE) {
-			clear();
 			show_dialog_text( title, lines, num_lines );
 		}
 	}
@@ -56,4 +55,5 @@ void show_dialog_text( char *title, char *lines[], int num_lines ) {
 	}
 
 	mvprintw(num_lines + 7, xpos, "SPACE to go back");
+	refresh();
 }
