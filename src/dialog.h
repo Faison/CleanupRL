@@ -1,5 +1,5 @@
 /**
- * Displays a full screen Dialog with a title and lines of text.
+ * Displays a full screen Dialog and waits for the user to escape it.
  *
  * @param char*   title The title to display above the dialog.
  * @param char*[] An array of lines of text.
