@@ -2,6 +2,7 @@
 #include <string.h>
 #include "menus.h"
 #include "dialog.h"
+#include "house.h"
 
 int main()
 {
@@ -20,6 +21,8 @@ int main()
 		"other stuff."
 	};
 
+	House *house = NULL;
+
 	do {
 		if ( strcmp(selection, "Main") == 0 ) {
 			selection = show_menu("CleanupRL", options, 3);
@@ -27,6 +30,10 @@ int main()
 			show_dialog("About CleanupRL", about_lines, 3);
 			selection = "Main";
 		} else if ( strcmp(selection, "New Game") == 0 ) {
+			house = generate_house();
+			display_house(house, 2, 2);
+			getch();
+			demolish_house(house);
 			selection = "Main";
 		}
 
