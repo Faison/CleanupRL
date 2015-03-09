@@ -14,9 +14,11 @@ int main()
 	char *options[] = {"New Game", "About", "Quit"};
 	char *selection = "Main";
 
-	char *about_lines[] = {"Some text about things",
-				"And other stuff when I care about",
-				"other stuff."};
+	char *about_lines[] = {
+		"Some text about things",
+		"And other stuff when I care about",
+		"other stuff."
+	};
 
 	do {
 		if ( strcmp(selection, "Main") == 0 ) {
