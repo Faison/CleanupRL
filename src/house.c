@@ -88,6 +88,7 @@ void display_house( House *house, int y_offset, int x_offset )
 {
 	int i;
 
+	clear();
 	for (i = 0; i < house->num_rooms; i++) {
 		display_room(house->rooms + i, y_offset, x_offset);
 	}
