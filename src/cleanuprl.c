@@ -3,6 +3,8 @@
 #include "menus.h"
 #include "dialog.h"
 #include "house.h"
+#include "player.h"
+#include "player_renderer.h"
 
 int main()
 {
@@ -21,7 +23,10 @@ int main()
 		"other stuff."
 	};
 
+	int c = 0;
+
 	House *house = NULL;
+	Player *player = NULL;
 
 	do {
 		if ( strcmp(selection, "Main") == 0 ) {
@@ -31,8 +36,24 @@ int main()
 			selection = "Main";
 		} else if ( strcmp(selection, "New Game") == 0 ) {
 			house = generate_house();
-			display_house(house, 2, 2);
-			getch();
+			player = create_player();
+			do {
+				if (c == KEY_UP) {
+					control_player(player, MOVE_UP);
+				} else if (c == KEY_LEFT) {
+					control_player(player, MOVE_LEFT);
+				} else if (c == KEY_DOWN) {
+					control_player(player, MOVE_DOWN);
+				} else if (c == KEY_RIGHT) {
+					control_player(player, MOVE_RIGHT);
+				}
+
+				clear();
+				display_house(house, 2, 2);
+				render_player(player);
+				c = getch();
+			} while (c != '\n' );
+			retire_player(player);
 			demolish_house(house);
 			selection = "Main";
 		}
