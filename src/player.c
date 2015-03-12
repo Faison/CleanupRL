@@ -4,13 +4,26 @@
 void control_player( Player *player, int action )
 {
 	if ( action == MOVE_UP ) {
-		player->y--;
+		player->y_velocity--;
 	} else if ( action == MOVE_RIGHT ) {
-		player->x++;
+		player->x_velocity++;
 	} else if ( action == MOVE_DOWN ) {
-		player->y++;
+		player->y_velocity++;
 	} else if ( action == MOVE_LEFT ) {
-		player->x--;
+		player->x_velocity--;
+	}
+}
+
+void resolve_player_control( Player *player )
+{
+	if ( player->y_velocity ) {
+		player->y += player->y_velocity;
+		player->y_velocity = 0;
+	}
+
+	if ( player->x_velocity ) {
+		player->x += player->x_velocity;
+		player->x_velocity = 0;
 	}
 }
 

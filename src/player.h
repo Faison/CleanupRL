@@ -18,5 +18,6 @@ enum CRL_Actions {
 Player *create_player( void );
 void retire_player( Player *player );
 void control_player( Player *player, int action );
+void resolve_player_control( Player *player );
 
 #endif

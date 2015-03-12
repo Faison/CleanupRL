@@ -48,6 +48,8 @@ int main()
 					control_player(player, MOVE_RIGHT);
 				}
 
+				resolve_player_control(player);
+
 				clear();
 				display_house(house, 2, 2);
 				render_player(player, 2, 2);
