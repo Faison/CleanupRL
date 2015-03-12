@@ -1,3 +1,6 @@
+#ifndef CRL_MENUS_H
+#define CRL_MENUS_H
+
 /**
  * Displays a full screen menu and allows users to select between the options.
  *
@@ -8,3 +11,5 @@
  * @return char* The options selected by the user.
  */
 char *show_menu( char *title, char *options[], int num_options );
+
+#endif

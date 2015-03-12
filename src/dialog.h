@@ -1,3 +1,6 @@
+#ifndef CRL_DIALOG_H
+#define CRL_DIALOG_H
+
 /**
  * Displays a full screen Dialog and waits for the user to escape it.
  *
@@ -7,4 +10,6 @@
  *
  * @return char* The options selected by the user.
  */
- void show_dialog( char *title, char *lines[], int num_lines );
+void show_dialog( char *title, char *lines[], int num_lines );
+
+#endif

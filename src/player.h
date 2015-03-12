@@ -1,3 +1,6 @@
+#ifndef CRL_PLAYER_H
+#define CRL_PLAYER_H
+
 typedef struct _crl_player {
 	int x;
 	int y;
@@ -15,3 +18,5 @@ enum CRL_Actions {
 Player *create_player( void );
 void retire_player( Player *player );
 void control_player( Player *player, int action );
+
+#endif

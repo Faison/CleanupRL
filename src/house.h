@@ -1,3 +1,6 @@
+#ifndef CRL_HOUSE_H
+#define CRL_HOUSE_H
+
 enum CRL_Wall {
 	CRL_WALL_TOP_LEFT     = (1 << 0),
 	CRL_WALL_TOP          = (1 << 1),
@@ -29,3 +32,5 @@ typedef struct _crl_room {
 House *generate_house();
 void demolish_house( House *house );
 void display_house( House *house, int y_offset, int x_offset );
+
+#endif
