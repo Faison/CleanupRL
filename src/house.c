@@ -84,15 +84,39 @@ void demolish_house( House *house )
 	free(house);
 }
 
+Room *get_room_at_point( House *house, int x, int y )
+{
+	int i;
+
+	if ( x < 0 || y < 0 ) {
+		return NULL;
+	}
+
+	for (i = 0; i < house->num_rooms; i++ ) {
+		if (is_point_in_room(house->rooms + i, x, y)) {
+			return house->rooms + i;
+		}
+	}
+
+	return NULL;
+}
+
+int is_point_in_room( Room *room, int x, int y )
+{
+	if ( room == NULL ) {
+		return 0;
+	}
+
+	return (room->x <= x && x < (room->x + room->width)) && (room->y <= y && y < (room->y + room->height));
+}
+
 void display_house( House *house, int y_offset, int x_offset )
 {
 	int i;
 
-	clear();
 	for (i = 0; i < house->num_rooms; i++) {
 		display_room(house->rooms + i, y_offset, x_offset);
 	}
-	refresh();
 }
 
 void display_room( Room *room, int y_offset, int x_offset )

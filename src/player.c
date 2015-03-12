@@ -36,7 +36,7 @@ Player *create_player( void )
 	}
 
 	player->x = 11;
-	player->y = 6;
+	player->y = 10;
 	player->x_velocity = 0;
 	player->y_velocity = 0;
 

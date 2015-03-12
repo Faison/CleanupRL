@@ -5,6 +5,7 @@
 #include "house.h"
 #include "player.h"
 #include "player_renderer.h"
+#include "collision.h"
 
 int main()
 {
@@ -47,12 +48,16 @@ int main()
 				} else if (c == KEY_RIGHT) {
 					control_player(player, MOVE_RIGHT);
 				}
+				clear();
+
+				handle_player_collisions( player, house );
 
 				resolve_player_control(player);
 
-				clear();
 				display_house(house, 2, 2);
 				render_player(player, 2, 2);
+
+				refresh();
 				c = getch();
 			} while (c != '\n' );
 			retire_player(player);
