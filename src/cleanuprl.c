@@ -50,7 +50,7 @@ int main()
 
 				clear();
 				display_house(house, 2, 2);
-				render_player(player);
+				render_player(player, 2, 2);
 				c = getch();
 			} while (c != '\n' );
 			retire_player(player);
