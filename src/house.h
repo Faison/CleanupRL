@@ -51,7 +51,6 @@ House *generate_house();
 void demolish_house( House *house );
 Room *get_room_at_point( House *house, int x, int y );
 int is_point_in_room( Room *room, int x, int y );
-void display_house( House *house, int y_offset, int x_offset );
 Room_Feature *get_feature_at_point( Room *room, int x, int y );
 void interact_with_room_feature( Room_Feature *feature );
 

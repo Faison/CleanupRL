@@ -4,8 +4,9 @@
 #include "dialog.h"
 #include "house.h"
 #include "player.h"
-#include "player_renderer.h"
 #include "collision.h"
+#include "player_renderer.h"
+#include "house_renderer.h"
 
 int main()
 {
