@@ -36,7 +36,7 @@ void handle_player_collision_with_features( Player *player, Room *room )
 
 	if (feature->type == CRL_DOOR_FEATURE) {
 		if (feature->state == CRL_CLOSE_STATE) {
-			feature->state = CRL_OPEN_STATE;
+			interact_with_room_feature(feature);
 			player->x_velocity = 0;
 			player->y_velocity = 0;
 		} else if (feature->state == CRL_OPEN_STATE) {

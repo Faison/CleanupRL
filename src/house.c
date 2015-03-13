@@ -168,6 +168,17 @@ Room_Feature *get_feature_at_point( Room *room, int x, int y )
 	return NULL;
 }
 
+void interact_with_room_feature( Room_Feature *feature )
+{
+	if (feature->type == CRL_DOOR_FEATURE) {
+		if (feature->state == CRL_CLOSE_STATE) {
+			feature->state = CRL_OPEN_STATE;
+		} else if (feature->state == CRL_OPEN_STATE) {
+			feature->state = CRL_CLOSE_STATE;
+		}
+	}
+}
+
 void display_house( House *house, int y_offset, int x_offset )
 {
 	int i;
