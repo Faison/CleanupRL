@@ -144,6 +144,30 @@ int is_point_in_room( Room *room, int x, int y )
 	return (room->x <= x && x < (room->x + room->width)) && (room->y <= y && y < (room->y + room->height));
 }
 
+Room_Feature *get_feature_at_point( Room *room, int x, int y )
+{
+	int i, f_x, f_y;
+
+	if (room == NULL) {
+		return NULL;
+	}
+
+	if ( x < 0 || y < 0) {
+		return NULL;
+	}
+
+	for (i = 0; i < room->num_features; i++ ) {
+		f_x = (room->features + i)->x + room->x;
+		f_y = (room->features + i)->y + room->y;
+
+		if ( f_x == x && f_y == y) {
+			return room->features + i;
+		}
+	}
+
+	return NULL;
+}
+
 void display_house( House *house, int y_offset, int x_offset )
 {
 	int i;
