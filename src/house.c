@@ -3,6 +3,8 @@
 #include "house.h"
 
 void display_room( Room *room, int y_offset, int x_offset );
+void display_room_features( Room *room, int y_offset, int x_offset );
+void display_feature( Room_Feature *feature, int y_offset, int x_offset );
 
 House *generate_house()
 {
@@ -25,12 +27,28 @@ House *generate_house()
 	house->rooms[0].width = 24;
 	house->rooms[0].height = 10;
 	house->rooms[0].walls = CRL_FULL_WALLS;
+	house->rooms[0].num_features = 1;
+	house->rooms[0].features = malloc(house->rooms[0].num_features * sizeof(Room_Feature));
+	if (house->rooms[0].features != NULL) {
+		house->rooms[0].features->type = CRL_DOOR_FEATURE;
+		house->rooms[0].features->state = CRL_CLOSE_STATE;
+		house->rooms[0].features->x = 13;
+		house->rooms[0].features->y = 9;
+	}
 
 	house->rooms[1].x = 23;
 	house->rooms[1].y = 0;
 	house->rooms[1].width = 14;
 	house->rooms[1].height = 10;
 	house->rooms[1].walls = CRL_FULL_WALLS;
+	house->rooms[1].num_features = 1;
+	house->rooms[1].features = malloc(house->rooms[1].num_features * sizeof(Room_Feature));
+	if (house->rooms[1].features != NULL) {
+		house->rooms[1].features->type = CRL_DOOR_FEATURE;
+		house->rooms[1].features->state = CRL_CLOSE_STATE;
+		house->rooms[1].features->x = 9;
+		house->rooms[1].features->y = 9;
+	}
 
 	house->rooms[2].x = 0;
 	house->rooms[2].y = 10;
@@ -43,12 +61,28 @@ House *generate_house()
 	house->rooms[3].width = 19;
 	house->rooms[3].height = 8;
 	house->rooms[3].walls = CRL_FULL_WALLS;
+	house->rooms[3].num_features = 1;
+	house->rooms[3].features = malloc(house->rooms[3].num_features * sizeof(Room_Feature));
+	if (house->rooms[3].features != NULL) {
+		house->rooms[3].features->type = CRL_DOOR_FEATURE;
+		house->rooms[3].features->state = CRL_CLOSE_STATE;
+		house->rooms[3].features->x = 9;
+		house->rooms[3].features->y = 0;
+	}
 
 	house->rooms[4].x = 18;
 	house->rooms[4].y = 13;
 	house->rooms[4].width = 19;
 	house->rooms[4].height = 8;
 	house->rooms[4].walls = CRL_FULL_WALLS;
+	house->rooms[4].num_features = 1;
+	house->rooms[4].features = malloc(house->rooms[4].num_features * sizeof(Room_Feature));
+	if (house->rooms[4].features != NULL) {
+		house->rooms[4].features->type = CRL_DOOR_FEATURE;
+		house->rooms[4].features->state = CRL_CLOSE_STATE;
+		house->rooms[4].features->x = 9;
+		house->rooms[4].features->y = 0;
+	}
 
 	house->rooms[5].x = 37;
 	house->rooms[5].y = 10;
@@ -114,8 +148,13 @@ void display_house( House *house, int y_offset, int x_offset )
 {
 	int i;
 
+	if (house == NULL) {
+		return;
+	}
+
 	for (i = 0; i < house->num_rooms; i++) {
 		display_room(house->rooms + i, y_offset, x_offset);
+		display_room_features(house->rooms + i, y_offset, x_offset);
 	}
 }
 
@@ -219,5 +258,38 @@ void display_room( Room *room, int y_offset, int x_offset )
 				}
 			}
 		}
+	}
+}
+
+void display_room_features( Room *room, int y_offset, int x_offset )
+{
+	int i;
+
+	if (room == NULL) {
+		return;
+	}
+
+	y_offset += room->y;
+	x_offset += room->x;
+
+	for (i = 0; i < room->num_features; i++) {
+		display_feature(room->features + i, y_offset, x_offset);
+	}
+}
+
+void display_feature( Room_Feature *feature, int y_offset, int x_offset )
+{
+	char f = '\0';
+
+	if (feature->type == CRL_DOOR_FEATURE) {
+		if (feature->state == CRL_CLOSE_STATE) {
+			f = '+';
+		} else if (feature->state == CRL_OPEN_STATE) {
+			f = '.';
+		}
+	}
+
+	if (f) {
+		mvaddch( feature->y + y_offset, feature->x + x_offset, f );
 	}
 }

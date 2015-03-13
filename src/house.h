@@ -14,6 +14,15 @@ enum CRL_Wall {
 							CRL_WALL_BOTTOM_RIGHT | CRL_WALL_BOTTOM | CRL_WALL_BOTTOM_LEFT | CRL_WALL_LEFT
 };
 
+enum CRL_FEATURE_TYPE {
+	CRL_DOOR_FEATURE
+};
+
+enum CRL_FEATURE_STATE {
+	CRL_OPEN_STATE,
+	CRL_CLOSE_STATE
+};
+
 typedef struct _crl_house {
 	int width;
 	int height;
@@ -27,7 +36,16 @@ typedef struct _crl_room {
 	int width;
 	int height;
 	int walls;
+	int num_features;
+	struct _crl_room_feature *features;
 } Room;
+
+typedef struct _crl_room_feature {
+	int x;
+	int y;
+	enum CRL_FEATURE_TYPE type;
+	enum CRL_FEATURE_STATE state;
+} Room_Feature;
 
 House *generate_house();
 void demolish_house( House *house );
