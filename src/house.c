@@ -174,3 +174,50 @@ void interact_with_room_feature( Room_Feature *feature )
 		}
 	}
 }
+
+int get_features_near_point( Room_Feature **features, House *house, int x, int y, int max )
+{
+	int i, n;
+	Room *room;
+	Room_Feature *feature;
+
+	for (i = 0; i < max; i++) {
+		features[i] = NULL;
+	}
+
+	n = 0;
+
+	room = get_room_at_point(house, x, y - 1);
+	if (room != NULL) {
+		feature = get_feature_at_point(room, x, y - 1);
+		if (feature != NULL) {
+			features[n++] = feature;
+		}
+	}
+
+	room = get_room_at_point(house, x + 1, y);
+	if (room != NULL) {
+		feature = get_feature_at_point(room, x + 1, y);
+		if (feature != NULL) {
+			features[n++] = feature;
+		}
+	}
+
+	room = get_room_at_point(house, x, y + 1);
+	if (room != NULL) {
+		feature = get_feature_at_point(room, x, y + 1);
+		if (feature != NULL) {
+			features[n++] = feature;
+		}
+	}
+
+	room = get_room_at_point(house, x - 1, y);
+	if (room != NULL) {
+		feature = get_feature_at_point(room, x - 1, y);
+		if (feature != NULL) {
+			features[n++] = feature;
+		}
+	}
+
+	return n;
+}

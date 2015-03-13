@@ -11,6 +11,8 @@ void control_player( Player *player, int action )
 		player->y_velocity++;
 	} else if ( action == MOVE_LEFT ) {
 		player->x_velocity--;
+	} else if (action == INTERACT_NEAREST ) {
+		player->intent = INTERACT_NEAREST;
 	}
 }
 
@@ -39,6 +41,7 @@ Player *create_player( void )
 	player->y = 10;
 	player->x_velocity = 0;
 	player->y_velocity = 0;
+	player->intent = 0;
 
 	return player;
 }

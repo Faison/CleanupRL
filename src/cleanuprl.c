@@ -4,6 +4,7 @@
 #include "dialog.h"
 #include "house.h"
 #include "player.h"
+#include "intent.h"
 #include "collision.h"
 #include "player_renderer.h"
 #include "house_renderer.h"
@@ -48,9 +49,13 @@ int main()
 					control_player(player, MOVE_DOWN);
 				} else if (c == KEY_RIGHT) {
 					control_player(player, MOVE_RIGHT);
+				} else if (c == ' ') {
+					control_player(player, INTERACT_NEAREST);
 				}
+
 				clear();
 
+				handle_player_intent( player, house );
 				handle_player_collisions( player, house );
 
 				resolve_player_control(player);
