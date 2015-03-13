@@ -34,8 +34,6 @@ void handle_player_collision_with_features( Player *player, Room *room )
 		return;
 	}
 
-	mvprintw(30, 10, "WE FOUND SOMETHING!");
-
 	if (feature->type == CRL_DOOR_FEATURE) {
 		if (feature->state == CRL_CLOSE_STATE) {
 			feature->state = CRL_OPEN_STATE;
