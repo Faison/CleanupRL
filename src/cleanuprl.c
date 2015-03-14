@@ -52,6 +52,11 @@ int main()
 					control_player(player, MOVE_RIGHT);
 				} else if (c == ' ') {
 					control_player(player, INTERACT_NEAREST);
+				} else if (c == CRL_KEY_RESIZE) {
+					crl_clear_windows();
+					display_house(house, 2, 2);
+					render_player(player, 2, 2);
+					crl_refresh_all_windows();
 				}
 
 				handle_player_intent( player, house );

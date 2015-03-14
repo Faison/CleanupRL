@@ -15,4 +15,6 @@ void crl_clear_windows( void );
 
 void crl_refresh_windows( void );
 
+void crl_refresh_all_windows( void );
+
 #endif

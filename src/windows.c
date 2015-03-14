@@ -43,6 +43,14 @@ void crl_clear_windows( void )
 	crl_clear_window(map_window);
 }
 
+void crl_refresh_all_windows( void )
+{
+	crl_refresh_window(map_window);
+	crl_refresh_window(info_window);
+	crl_refresh_window(log_window);
+	crl_refresh_window(other_window);
+}
+
 void crl_refresh_windows( void )
 {
 	crl_refresh_window(map_window);
