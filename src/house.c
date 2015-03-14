@@ -195,7 +195,8 @@ int get_features_near_point( Room_Feature **features, House *house, int x, int y
 	for (i = 0; i < n_rooms; i++) {
 		feature = get_feature_at_point(rooms[i], x, y - 1);
 		if (feature != NULL) {
-			features[n++] = feature;
+			features[0] = feature;
+			n++;
 		}
 	}
 
@@ -203,7 +204,8 @@ int get_features_near_point( Room_Feature **features, House *house, int x, int y
 	for (i = 0; i < n_rooms; i++) {
 		feature = get_feature_at_point(rooms[i], x + 1, y);
 		if (feature != NULL) {
-			features[n++] = feature;
+			features[1] = feature;
+			n++;
 		}
 	}
 
@@ -211,7 +213,8 @@ int get_features_near_point( Room_Feature **features, House *house, int x, int y
 	for (i = 0; i < n_rooms; i++) {
 		feature = get_feature_at_point(rooms[i], x, y + 1);
 		if (feature != NULL) {
-			features[n++] = feature;
+			features[2] = feature;
+			n++;
 		}
 	}
 
@@ -219,7 +222,8 @@ int get_features_near_point( Room_Feature **features, House *house, int x, int y
 	for (i = 0; i < n_rooms; i++) {
 		feature = get_feature_at_point(rooms[i], x - 1, y);
 		if (feature != NULL) {
-			features[n++] = feature;
+			features[3] = feature;
+			n++;
 		}
 	}
 

@@ -50,12 +50,12 @@ int main()
 					control_player(player, INTERACT_NEAREST);
 				}
 
-				crl_clear_screen();
-
 				handle_player_intent( player, house );
 				handle_player_collisions( player, house );
 
 				resolve_player_control(player);
+
+				crl_clear_screen();
 
 				display_house(house, 2, 2);
 				render_player(player, 2, 2);
