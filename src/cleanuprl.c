@@ -6,6 +6,7 @@
 #include "player.h"
 #include "intent.h"
 #include "collision.h"
+#include "input.h"
 #include "player_renderer.h"
 #include "house_renderer.h"
 
@@ -41,13 +42,13 @@ int main()
 			house = generate_house();
 			player = create_player();
 			do {
-				if (c == KEY_UP) {
+				if (c == CRL_KEY_UP) {
 					control_player(player, MOVE_UP);
-				} else if (c == KEY_LEFT) {
+				} else if (c == CRL_KEY_LEFT) {
 					control_player(player, MOVE_LEFT);
-				} else if (c == KEY_DOWN) {
+				} else if (c == CRL_KEY_DOWN) {
 					control_player(player, MOVE_DOWN);
-				} else if (c == KEY_RIGHT) {
+				} else if (c == CRL_KEY_RIGHT) {
 					control_player(player, MOVE_RIGHT);
 				} else if (c == ' ') {
 					control_player(player, INTERACT_NEAREST);
@@ -64,7 +65,7 @@ int main()
 				render_player(player, 2, 2);
 
 				refresh();
-				c = getch();
+				c = crl_get_ch();
 			} while (c != '\n' );
 			retire_player(player);
 			demolish_house(house);
