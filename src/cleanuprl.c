@@ -1,5 +1,5 @@
-#include <ncurses.h>
 #include <string.h>
+#include "screen.h"
 #include "menus.h"
 #include "dialog.h"
 #include "house.h"
@@ -12,11 +12,7 @@
 
 int main()
 {
-	initscr();
-	raw();
-	keypad(stdscr, TRUE);
-	curs_set(0);
-	noecho();
+	crl_init_screen();
 
 	char *options[] = {"New Game", "About", "Quit"};
 	char *selection = "Main";
@@ -54,7 +50,7 @@ int main()
 					control_player(player, INTERACT_NEAREST);
 				}
 
-				clear();
+				crl_clear_screen();
 
 				handle_player_intent( player, house );
 				handle_player_collisions( player, house );
@@ -64,7 +60,7 @@ int main()
 				display_house(house, 2, 2);
 				render_player(player, 2, 2);
 
-				refresh();
+				crl_refresh_screen();
 				c = crl_get_ch();
 			} while (c != '\n' );
 			retire_player(player);
@@ -74,7 +70,7 @@ int main()
 
 	} while ( strcmp(selection, "Quit") != 0 );
 
-	endwin();
+	crl_end_screen();
 
 	return 0;
 }
