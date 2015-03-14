@@ -24,7 +24,7 @@ void handle_player_intent( Player *player, House *house )
 			}
 		} else if (n_features > 1) {
 			do {
-				mvprintw(30, 10, "Which direction to interact?");
+				mvprintw(35, 10, "Which direction to interact?");
 				c = crl_get_ch();
 
 				if (c == CRL_KEY_UP && features[0] != NULL) {

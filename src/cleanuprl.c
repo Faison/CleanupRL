@@ -1,5 +1,6 @@
 #include <string.h>
 #include "screen.h"
+#include "windows.h"
 #include "menus.h"
 #include "dialog.h"
 #include "house.h"
@@ -37,6 +38,9 @@ int main()
 		} else if ( strcmp(selection, "New Game") == 0 ) {
 			house = generate_house();
 			player = create_player();
+
+			crl_create_windows();
+
 			do {
 				if (c == CRL_KEY_UP) {
 					control_player(player, MOVE_UP);
@@ -55,16 +59,20 @@ int main()
 
 				resolve_player_control(player);
 
-				crl_clear_screen();
+				crl_clear_windows();
 
 				display_house(house, 2, 2);
 				render_player(player, 2, 2);
 
-				crl_refresh_screen();
+				crl_refresh_windows();
 				c = crl_get_ch();
 			} while (c != '\n' );
+
+			crl_destroy_windows();
+
 			retire_player(player);
 			demolish_house(house);
+
 			selection = "Main";
 		}
 
