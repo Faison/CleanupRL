@@ -28,7 +28,7 @@ House *generate_house()
 	if (house->rooms[0].features != NULL) {
 		house->rooms[0].features->type = CRL_DOOR_FEATURE;
 		house->rooms[0].features->state = CRL_CLOSE_STATE;
-		house->rooms[0].features->x = 13;
+		house->rooms[0].features->x = 22;
 		house->rooms[0].features->y = 9;
 	}
 
@@ -37,13 +37,17 @@ House *generate_house()
 	house->rooms[1].width = 14;
 	house->rooms[1].height = 10;
 	house->rooms[1].walls = CRL_FULL_WALLS;
-	house->rooms[1].num_features = 1;
+	house->rooms[1].num_features = 2;
 	house->rooms[1].features = malloc(house->rooms[1].num_features * sizeof(Room_Feature));
 	if (house->rooms[1].features != NULL) {
 		house->rooms[1].features->type = CRL_DOOR_FEATURE;
 		house->rooms[1].features->state = CRL_CLOSE_STATE;
 		house->rooms[1].features->x = 9;
 		house->rooms[1].features->y = 9;
+		(house->rooms[1].features + 1)->type = CRL_DOOR_FEATURE;
+		(house->rooms[1].features + 1)->state = CRL_CLOSE_STATE;
+		(house->rooms[1].features + 1)->x = 0;
+		(house->rooms[1].features + 1)->y = 8;
 	}
 
 	house->rooms[2].x = 0;
@@ -114,21 +118,21 @@ void demolish_house( House *house )
 	free(house);
 }
 
-Room *get_room_at_point( House *house, int x, int y )
+int get_rooms_at_point( Room **rooms, House *house, int x, int y, int max )
 {
-	int i;
+	int i, n = 0;
 
 	if ( x < 0 || y < 0 ) {
-		return NULL;
+		return 0;
 	}
 
-	for (i = 0; i < house->num_rooms; i++ ) {
+	for (i = 0; i < house->num_rooms && n < max; i++ ) {
 		if (is_point_in_room(house->rooms + i, x, y)) {
-			return house->rooms + i;
+			rooms[n++] = house->rooms + i;
 		}
 	}
 
-	return NULL;
+	return n;
 }
 
 int is_point_in_room( Room *room, int x, int y )
@@ -177,43 +181,43 @@ void interact_with_room_feature( Room_Feature *feature )
 
 int get_features_near_point( Room_Feature **features, House *house, int x, int y, int max )
 {
-	int i, n;
-	Room *room;
+	int i, n, n_rooms, max_rooms = 4;
+	Room *rooms[max_rooms];
 	Room_Feature *feature;
 
-	for (i = 0; i < max; i++) {
-		features[i] = NULL;
+	for (i = 0; i < max_rooms; i++) {
+		rooms[i] = NULL;
 	}
 
 	n = 0;
 
-	room = get_room_at_point(house, x, y - 1);
-	if (room != NULL) {
-		feature = get_feature_at_point(room, x, y - 1);
+	n_rooms = get_rooms_at_point(rooms, house, x, y - 1, max_rooms);
+	for (i = 0; i < n_rooms; i++) {
+		feature = get_feature_at_point(rooms[i], x, y - 1);
 		if (feature != NULL) {
 			features[n++] = feature;
 		}
 	}
 
-	room = get_room_at_point(house, x + 1, y);
-	if (room != NULL) {
-		feature = get_feature_at_point(room, x + 1, y);
+	n_rooms = get_rooms_at_point(rooms, house, x + 1, y, max_rooms);
+	for (i = 0; i < n_rooms; i++) {
+		feature = get_feature_at_point(rooms[i], x + 1, y);
 		if (feature != NULL) {
 			features[n++] = feature;
 		}
 	}
 
-	room = get_room_at_point(house, x, y + 1);
-	if (room != NULL) {
-		feature = get_feature_at_point(room, x, y + 1);
+	n_rooms = get_rooms_at_point(rooms, house, x, y + 1, max_rooms);
+	for (i = 0; i < n_rooms; i++) {
+		feature = get_feature_at_point(rooms[i], x, y + 1);
 		if (feature != NULL) {
 			features[n++] = feature;
 		}
 	}
 
-	room = get_room_at_point(house, x - 1, y);
-	if (room != NULL) {
-		feature = get_feature_at_point(room, x - 1, y);
+	n_rooms = get_rooms_at_point(rooms, house, x - 1, y, max_rooms);
+	for (i = 0; i < n_rooms; i++) {
+		feature = get_feature_at_point(rooms[i], x - 1, y);
 		if (feature != NULL) {
 			features[n++] = feature;
 		}

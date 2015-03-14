@@ -7,14 +7,30 @@ void handle_player_collision_with_features( Player *player, Room *room );
 void handle_player_collision_with_walls( Player *player, Room *room );
 
 void handle_player_collisions( Player *player, House *house ) {
+	int i, n, max_rooms = 4;
+	Room *rooms[max_rooms];
+
 	if (player == NULL || house == NULL) {
 		return;
 	}
 
-	Room *room = get_room_at_point( house, player->x + player->x_velocity, player->y + player->y_velocity);
+	if (player->x_velocity == 0 && player->y_velocity == 0) {
+		return;
+	}
 
-	handle_player_collision_with_features(player, room);
-	handle_player_collision_with_walls(player, room);
+	for (i = 0; i < max_rooms; i++) {
+		rooms[i] = NULL;
+	}
+
+	n = get_rooms_at_point(rooms, house, player->x + player->x_velocity, player->y + player->y_velocity, max_rooms);
+
+	for (i = 0; i < n; i++) {
+		handle_player_collision_with_features(player, rooms[i]);
+	}
+
+	for (i = 0; i < n; i++) {
+		handle_player_collision_with_walls(player, rooms[i]);
+	}
 }
 
 void handle_player_collision_with_features( Player *player, Room *room )

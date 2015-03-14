@@ -49,7 +49,7 @@ typedef struct _crl_room_feature {
 
 House *generate_house();
 void demolish_house( House *house );
-Room *get_room_at_point( House *house, int x, int y );
+int get_rooms_at_point( Room **rooms, House *house, int x, int y, int max );
 int is_point_in_room( Room *room, int x, int y );
 Room_Feature *get_feature_at_point( Room *room, int x, int y );
 void interact_with_room_feature( Room_Feature *feature );

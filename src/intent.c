@@ -5,13 +5,17 @@
 
 void handle_player_intent( Player *player, House *house )
 {
-	int n_features;
-	Room_Feature *features[4];
+	int i, n_features, max_features = 8;
+	Room_Feature *features[max_features];
+
+	for (i = 0; i < max_features; i++) {
+		features[i] = NULL;
+	}
 
 	if (player->intent == INTERACT_NEAREST) {
-		n_features = get_features_near_point(features, house, player->x, player->y, 4);
-		if (n_features == 1) {
-			interact_with_room_feature(*features);
+		n_features = get_features_near_point(features, house, player->x, player->y, max_features);
+		if (n_features > 0) {
+			interact_with_room_feature(features[0]);
 		}
 	}
 
