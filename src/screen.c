@@ -1,6 +1,6 @@
 #include <ncurses.h>
 
-void crl_init_screen()
+void crl_init_screen( void )
 {
 	initscr();
 	raw();
@@ -9,17 +9,17 @@ void crl_init_screen()
 	noecho();
 }
 
-void crl_end_screen()
+void crl_end_screen( void )
 {
 	endwin();
 }
 
-void crl_clear_screen()
+void crl_clear_screen( void )
 {
 	clear();
 }
 
-void crl_refresh_screen()
+void crl_refresh_screen( void )
 {
 	refresh();
 }
